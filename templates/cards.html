@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Upcoming Tech Events</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Manrope', sans-serif; /* Use Google's Manrope font */
+        }
+
+        /* Add some basic styling for the cards */
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+
+        .card-name {
+            font-weight: bold;
+        }
+
+        .card-desc {
+            margin-top: 5px;
+        }
+
+        .card-tags {
+            font-size: 12px;
+            margin-top: 5px;
+            color: #666;
+        }
+
+        /* Set a maximum width for the page content */
+        .page-content {
+            max-width: 1920px; /* Full HD screen width */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Set a maximum width for the cards */
+        .card-container {
+            max-width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Give each card a unique background color */
+        .card:nth-child(odd) {
+            background-color: #074A41;
+            color: white;
+        }
+
+        .card:nth-child(even) {
+            background-color: #FFBAB6;
+        }
+
+        /* Set the width of each card */
+        .card {
+            flex: 1 1 300px;
+            margin: 10px;
+        }
+    </style>
+    <!-- Add Google Fonts stylesheet -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+</head>
+<body>
+    <div class="page-content">
+        <h1>Upcoming Tech Events (via Tech Events Trello Board)</h1>
+
+        <div class="card-container">
+            {% for card in cards %}
+                <div class="card">
+                    <div class="card-name">{{ card['name'] }}</div>
+                    {% if card['labels'] %}
+                        <div class="card-tags">
+                            {% for label in card['labels'] %}
+                                <span style="background-color: black; color: white; padding: 3px; border-radius: 3px; margin-right: 5px;">{{ label['name'] }}</span>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if card['desc'] %}
+                        <div class="card-desc">{{ card['desc'] }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
